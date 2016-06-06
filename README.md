@@ -55,7 +55,7 @@ What happens in this scenario is that if any of the validations fails, an `Asser
 
 The projects homepage can be found [here](https://github.com/jauntvrpeter/requestests).
 
-## Supported Operations on a Requests
+## Supported Operations on a Response
 
 ### json\_decode(self, serializable\_class):
 
