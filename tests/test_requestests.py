@@ -15,6 +15,34 @@ class TestRequestests:
         assert response.ttlb > 0, "There is a valid TTLB in Response - ttlb: {}".format(response.ttlb)
         assert response.request_url, "There is a valid request_url in Response - url: {}".format(response.request_url)
 
+    def test_validate_ttlb(self):
+        requestests.get('http://www.google.com') \
+            .validate_code(requestests.codes.ok) \
+            .validate_ttlb_lt(60)
+
+    def test_validate_duration(self):
+        requestests.get('http://www.google.com') \
+            .validate_code(requestests.codes.ok) \
+            .validate_duration_lt(60)
+
+    def test_validate_ttlb_failure(self):
+        try:
+            requestests.get('http://www.google.com') \
+                .validate_code(requestests.codes.ok) \
+                .validate_ttlb_lt(0)
+            assert False, "Expected validate duration < 0 to fail"
+        except AssertionError:
+            pass
+
+    def test_validate_duration_failure(self):
+        try:
+            requestests.get('http://www.google.com') \
+                .validate_code(requestests.codes.ok) \
+                .validate_duration_lt(0)
+            assert False, "Expected validate duration < 0 to fail"
+        except AssertionError:
+            pass
+
     def test_validations_using_builder_logic(self):
         pass
         # requestests.get(testing_url1) \

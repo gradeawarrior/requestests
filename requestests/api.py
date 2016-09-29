@@ -38,7 +38,7 @@ def validate_code(self, code):
     :raises: AssertionError, if the response.code != code
     """
 
-    assert self.status_code == code
+    assert self.status_code == code, "{} - {} == {}".foramt(self.request_url, self.status_code, code)
     return self
 
 
@@ -51,7 +51,7 @@ def validate_not_code(self, code):
     :raises: AssertionError, if the response.code == code
     """
 
-    assert self.status_code != code
+    assert self.status_code != code, "{} - {} != {}".foramt(self.request_url, self.status_code, code)
     return self
 
 
@@ -124,7 +124,7 @@ def validate_content(self, value):
     :raises: AssertionError, if body does not match
     """
 
-    assert re.search(value, self.text)
+    assert re.search(value, self.text), "{} - Unable to find '{}'".format(self.request_url, value)
     return self
 
 
@@ -139,8 +139,33 @@ def validate_entity_eq(self, value):
     """
 
     entity = self.json_decode(value.__class__)
-    assert entity == value, "{} == {}".format(str(entity), str(value))
+    assert entity == value, "{} - {} == {}".format(self.request_url, str(entity), str(value))
     return self
+
+
+def validate_ttlb_lt(self, duration):
+    '''Validate time-to-last-byte is less than duration
+
+    :param duration: The maximum duration expected in seconds
+    :return: :class:`Response <Response>` object
+    :rtype: requests.Response
+    :raises: AssertionError, if objects do not match
+    '''
+
+    assert self.ttlb < duration, "{} - {} (ttlb) < {} (duration)".format(self.request_url, self.ttlb, duration)
+    return self
+
+
+def validate_duration_lt(self, duration):
+    '''Validate time-to-last-byte is less than duration. This is an alias for validate_ttlb_lt()
+
+    :param duration: The maximum duration expected in seconds
+    :return: :class:`Response <Response>` object
+    :rtype: requests.Response
+    :raises: AssertionError, if objects do not match
+    '''
+
+    return self.validate_ttlb_lt(duration)
 
 
 def ttlb(self, ttlb=None):
@@ -175,6 +200,8 @@ Response.validate_header_eq = validate_header_eq
 Response.validate_header_like = validate_header_like
 Response.validate_content = validate_content
 Response.validate_entity_eq = validate_entity_eq
+Response.validate_ttlb_lt = validate_ttlb_lt
+Response.validate_duration_lt = validate_duration_lt
 Response.ttlb = ttlb
 Response.request_url = request_url
 
