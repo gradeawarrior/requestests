@@ -145,7 +145,7 @@ Validates content body
     :param ttlb: The time-to-last-byte for the given request. If you don't specify anything, it simply returns the value
     :return: Returns the value of time-to-last-byte
 
-_**NOTE:** You will need to use requestests version of GET/POST/PUT/DELETE in order for ttlb and request\_url to be set in your Response object. Example:_
+_Example:_
 
 	> response = requestests.get("http://www.google.com") \
 	    .validate_code(requests.codes.ok)
@@ -158,6 +158,15 @@ _**NOTE:** You will need to use requestests version of GET/POST/PUT/DELETE in or
 
     :param url: The request URL. If you don't specify anything, it simply returns the value
     :return: Returns the value of the request URL
+
+_Example:_
+
+	> response = requestests.get("http://www.google.com") \
+	    .validate_code(requests.codes.ok)
+	> print response.ttlb
+	0.426213979721
+	> print response.request_url
+	http://www.google.com
 
 # Contributing to Requestests
  
