@@ -39,7 +39,7 @@ can be simplified to this:
 	
 Validations follow the builder paradigm, so operations can be chained together:
 
-	json = requests.get('https://api.github.com.user') \
+	entity = requests.get('https://api.github.com.user') \
 				.validate_code(requests.code.ok) \
 				.validate_header_like('Content-Type', 'application/json') \
 				.json()
@@ -139,6 +139,25 @@ Validates content body
     :return: :class:`Response <Response>` object
     :rtype: requests.Response
     :raises: AssertionError, if objects do not match
+    
+### ttlb(self, ttlb=None):
+ 
+    :param ttlb: The time-to-last-byte for the given request. If you don't specify anything, it simply returns the value
+    :return: Returns the value of time-to-last-byte
+
+_**NOTE:** You will need to use requestests version of GET/POST/PUT/DELETE in order for ttlb and request\_url to be set in your Response object. Example:_
+
+	> response = requestests.get("http://www.google.com") \
+	    .validate_code(requests.codes.ok)
+	> print response.ttlb
+	0.426213979721
+	> print response.request_url
+	http://www.google.com
+
+### request\_url(self, url=None):
+
+    :param url: The request URL. If you don't specify anything, it simply returns the value
+    :return: Returns the value of the request URL
 
 # Contributing to Requestests
  

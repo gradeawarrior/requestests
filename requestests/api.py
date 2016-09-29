@@ -14,6 +14,7 @@ This module extends the Requests API for testing purposes.
 import jsonstruct
 import re
 import requests
+import time
 from requests.models import Response
 
 
@@ -142,6 +143,28 @@ def validate_entity_eq(self, value):
     return self
 
 
+def ttlb(self, ttlb=None):
+    '''Set/Get of the time-to-last-byte
+
+    :param ttlb: The time-to-last-byte for the given request. If you don't specify anything, it simply returns the value
+    :return: Returns the value of time-to-last-byte
+    '''
+    if ttlb:
+        self.ttlb = ttlb
+    return self.ttlb if self.ttlb else None
+
+
+def request_url(self, url=None):
+    '''Set/Get of the Request URL
+
+    :param url: The request URL. If you don't specify anything, it simply returns the value
+    :return: Returns the value of the request URL
+    '''
+    if url:
+        self.request_url = url
+    return self.request_url if self.request_url else None
+
+
 # Code to extend the existing requests.Response object
 Response.json_decode = json_decode
 Response.validate_code = validate_code
@@ -152,6 +175,8 @@ Response.validate_header_eq = validate_header_eq
 Response.validate_header_like = validate_header_like
 Response.validate_content = validate_content
 Response.validate_entity_eq = validate_entity_eq
+Response.ttlb = ttlb
+Response.request_url = request_url
 
 
 def get(url, params=None, **kwargs):
@@ -164,7 +189,13 @@ def get(url, params=None, **kwargs):
     :rtype: requests.Response
     """
 
-    return requests.get(url, params=params, **kwargs)
+    start = time.time()
+    response = requests.get(url, params=params, **kwargs)
+    duration = time.time() - start
+    response.ttlb(ttlb=duration)
+    response.request_url(url=url)
+    return response
+
 
 
 def options(url, **kwargs):
@@ -176,7 +207,12 @@ def options(url, **kwargs):
     :rtype: requests.Response
     """
 
-    return requests.options(url, **kwargs)
+    start = time.time()
+    response = requests.options(url, **kwargs)
+    duration = time.time() - start
+    response.ttlb(ttlb=duration)
+    response.request_url(url=url)
+    return response
 
 
 def head(url, **kwargs):
@@ -188,7 +224,12 @@ def head(url, **kwargs):
     :rtype: requests.Response
     """
 
-    return requests.head(url, **kwargs)
+    start = time.time()
+    response = requests.head(url, **kwargs)
+    duration = time.time() - start
+    response.ttlb(ttlb=duration)
+    response.request_url(url=url)
+    return response
 
 
 def post(url, data=None, json=None, **kwargs):
@@ -202,7 +243,12 @@ def post(url, data=None, json=None, **kwargs):
     :rtype: requests.Response
     """
 
-    return requests.post(url, data=data, json=json, **kwargs)
+    start = time.time()
+    response = requests.post(url, data=data, json=json, **kwargs)
+    duration = time.time() - start
+    response.ttlb(ttlb=duration)
+    response.request_url(url=url)
+    return response
 
 
 def put(url, data=None, **kwargs):
@@ -215,7 +261,12 @@ def put(url, data=None, **kwargs):
     :rtype: requests.Response
     """
 
-    return requests.put(url, data=data, **kwargs)
+    start = time.time()
+    response = requests.put(url, data=data, **kwargs)
+    duration = time.time() - start
+    response.ttlb(ttlb=duration)
+    response.request_url(url=url)
+    return response
 
 
 def patch(url, data=None, **kwargs):
@@ -228,7 +279,12 @@ def patch(url, data=None, **kwargs):
     :rtype: requests.Response
     """
 
-    return requests.patch(url, data=data, **kwargs)
+    start = time.time()
+    response = requests.patch(url, data=data, **kwargs)
+    duration = time.time() - start
+    response.ttlb(ttlb=duration)
+    response.request_url(url=url)
+    return response
 
 
 def delete(url, **kwargs):
@@ -240,4 +296,9 @@ def delete(url, **kwargs):
     :rtype: requests.Response
     """
 
-    return requests.delete(url, **kwargs)
+    start = time.time()
+    response = requests.delete(url, **kwargs)
+    duration = time.time() - start
+    response.ttlb(ttlb=duration)
+    response.request_url(url=url)
+    return response
