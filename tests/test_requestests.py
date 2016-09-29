@@ -3,31 +3,33 @@ import requestests
 
 
 class TestRequestests:
+    test_url = 'http://www.google.com'
+
     def test_ttlb_and_request_url_using_requestests(self):
-        response = requestests.get('http://www.google.com') \
+        response = requestests.get(self.test_url) \
             .validate_code(requestests.codes.ok)
         assert response.ttlb > 0, "There is a valid TTLB in Response - ttlb: {}".format(response.ttlb)
         assert response.request_url, "There is a valid request_url in Response - url: {}".format(response.request_url)
 
     def test_ttlb_and_request_url_using_requests(self):
-        response = requests.get('http://www.google.com') \
+        response = requests.get(self.test_url) \
             .validate_code(requests.codes.ok)
         assert response.ttlb > 0, "There is a valid TTLB in Response - ttlb: {}".format(response.ttlb)
         assert response.request_url, "There is a valid request_url in Response - url: {}".format(response.request_url)
 
     def test_validate_ttlb(self):
-        requestests.get('http://www.google.com') \
+        requestests.get(self.test_url) \
             .validate_code(requestests.codes.ok) \
             .validate_ttlb_lt(60)
 
     def test_validate_duration(self):
-        requestests.get('http://www.google.com') \
+        requestests.get(self.test_url) \
             .validate_code(requestests.codes.ok) \
             .validate_duration_lt(60)
 
     def test_validate_ttlb_failure(self):
         try:
-            requestests.get('http://www.google.com') \
+            requestests.get(self.test_url) \
                 .validate_code(requestests.codes.ok) \
                 .validate_ttlb_lt(0)
             assert False, "Expected validate duration < 0 to fail"
@@ -36,7 +38,7 @@ class TestRequestests:
 
     def test_validate_duration_failure(self):
         try:
-            requestests.get('http://www.google.com') \
+            requestests.get(self.test_url) \
                 .validate_code(requestests.codes.ok) \
                 .validate_duration_lt(0)
             assert False, "Expected validate duration < 0 to fail"
@@ -51,8 +53,14 @@ class TestRequestests:
         #     .validate_header_like('Content-Type', '^text/html')
 
     def test_validate_code(self):
-        pass
-        # response1.validate_code(requestests.codes.ok)
+        requests.get(self.test_url).validate_code(requests.codes.ok)
+
+    def test_validate_code_failure(self):
+        try:
+            requests.get(self.test_url).validate_code(requests.codes.not_found)
+            assert False, "Expected validate_code to fail"
+        except AssertionError:
+            pass
 
     def test_validate_not_code(self):
         pass

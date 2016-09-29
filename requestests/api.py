@@ -38,7 +38,7 @@ def validate_code(self, code):
     :raises: AssertionError, if the response.code != code
     """
 
-    assert self.status_code == code, "{} - {} == {}".foramt(self.request_url, self.status_code, code)
+    assert self.status_code == code, "{} - {} == {}".format(self.request_url, self.status_code, code)
     return self
 
 
