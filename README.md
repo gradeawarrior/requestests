@@ -12,9 +12,8 @@ The library can be installed via:
 
 Using the built-in validations in `requestests` is intended to be an extremely intuitive extension of using `requests`:
 
-	>>> import requests
 	>>> import requestestests
-	>>> r = requests.get('https://api.github.com/user', auth=('user', 'pass'))
+	>>> r = requestests.get('https://api.github.com/user', auth=('user', 'pass'))
 	>>> r.validate_code(requests.code.ok)
 	>>> r.validate_header_like('Content-Type', 'application/json')
 	>>> r.encoding
@@ -31,15 +30,15 @@ What is happening is that the assertion operation is being abstracted out. The t
 	
 can be simplified to this:
 	
-	r = requests.get('https://api.github.com.user')
+	r = requestests.get('https://api.github.com.user')
 	r.validate_code(requests.code.ok)
 	
 	## Or even to this
-	r = requests.get('https://api.github.com.user').validate_code(requests.code.ok)
+	r = requestests.get('https://api.github.com.user').validate_code(requests.code.ok)
 	
 Validations follow the builder paradigm, so operations can be chained together:
 
-	entity = requests.get('https://api.github.com.user') \
+	entity = requestests.get('https://api.github.com.user') \
 				.validate_code(requests.code.ok) \
 				.validate_header_like('Content-Type', 'application/json') \
 				.json()
@@ -148,7 +147,7 @@ Validates content body
 _Example:_
 
 	> response = requestests.get("http://www.google.com") \
-	    .validate_code(requests.codes.ok)
+	    .validate_code(requestests.codes.ok)
 	> print response.ttlb
 	0.426213979721
 	> print response.request_url
@@ -162,7 +161,7 @@ _Example:_
 _Example:_
 
 	> response = requestests.get("http://www.google.com") \
-	    .validate_code(requests.codes.ok)
+	    .validate_code(requestests.codes.ok)
 	> print response.ttlb
 	0.426213979721
 	> print response.request_url

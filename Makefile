@@ -1,17 +1,42 @@
+VIRTUALENV?=venv
 
-init:
-	pip install -r requirements.txt
+init: setup.venv
+	$(info ****************)
+	$(info > init)
+	$(info ****************)
+	source $(VIRTUALENV)/bin/activate; pip install -r requirements.txt
 
-test:
+setup.venv:
+	$(info ****************)
+	$(info > setup:venv)
+	$(info ****************)
+	virtualenv $(VIRTUALENV)
+
+delete.venv:
+	$(info ****************)
+	$(info > delete:venv)
+	$(info ****************)
+	rm -rf $(VIRTUALENV)
+
+test: init
 	# This runs all of the tests. To run an individual test, run py.test with
 	# the -k flag, like "py.test -k test_path_is_not_double_encoded"
-	py.test tests -lvs
+	$(info ****************)
+	$(info > test)
+	$(info ****************)
+	source $(VIRTUALENV)/bin/activate; py.test tests -lvs
 
-coverage:
-	py.test --verbose --cov-report term --cov=requests tests
+coverage: init
+	$(info ****************)
+	$(info > coverage)
+	$(info ****************)
+	source $(VIRTUALENV)/bin/activate; py.test --verbose --cov-report term --cov=requests tests
 
 ci: init
-	py.test --junitxml=junit.xml
+	$(info ****************)
+	$(info > ci)
+	$(info ****************)
+	source $(VIRTUALENV)/bin/activate; py.test --junitxml=junit.xml
 
 publish.test:
 	python setup.py register -r pypitest

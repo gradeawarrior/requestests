@@ -45,7 +45,7 @@ with open('requestests/__init__.py', 'r') as fd:
 if not version:
     raise RuntimeError('Cannot find version information')
 
-with open('README.md', 'r', 'utf-8') as f:
+with open('README-pypi.md', 'r', 'utf-8') as f:
     readme = f.read()
 with open('HISTORY.md', 'r', 'utf-8') as f:
     history = f.read()

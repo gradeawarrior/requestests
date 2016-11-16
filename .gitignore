@@ -15,6 +15,7 @@ requestests.egg-info/
 *.swp
 *.egg
 env/
+venv/
 
 .workon
 .idea/

@@ -35,7 +35,7 @@ is at <http://python-requests.org>.
 """
 
 __title__ = 'requestests'
-__version__ = '1.1.2'
+__version__ = '1.2.0'
 __build__ = 0x021000
 __author__ = 'Peter Salas'
 __license__ = 'Apache 2.0'
