@@ -3,7 +3,7 @@ Requestests is written and maintained by Peter Salas and various contributors:
 Key Master
 ==========
 
-- Peter Salas <peter@jauntvr.com> [@jauntvrpeter](http://github.com/jauntvrpeter)
+- Peter Salas <requestests@googlegroups.com> [@gradeawarrior](http://github.com/gradeawarrior)
 
 
 Patches and Suggestions

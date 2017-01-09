@@ -1,20 +1,20 @@
 # Contribution Guidelines
 
-Before opening any issues or proposing any pull requests, please do the
+Before opening any issues or proposing any pull requestests, please do the
 following:
 
-1. Read our [Contributor's Guide](http://docs.python-requests.org/en/latest/dev/contributing/).
-2. Understand our [development philosophy](http://docs.python-requests.org/en/latest/dev/philosophy/).
+1. Read our [Contributor's Guide](http://docs.python-requestests.org/en/latest/dev/contributing/).
+2. Understand our [development philosophy](http://docs.python-requestests.org/en/latest/dev/philosophy/).
 
 To get the greatest chance of helpful responses, please also observe the
 following additional notes.
 
 ## Questions
 
-The GitHub issue tracker is for *bug reports* and *feature requests*. Please do
+The GitHub issue tracker is for *bug reports* and *feature requestests*. Please do
 not use it to ask questions about how to use Requests. These questions should
 instead be directed to [Stack Overflow](https://stackoverflow.com/). Make sure
-that your question is tagged with the `python-requests` tag when asking it on
+that your question is tagged with the `python-requestests` tag when asking it on
 Stack Overflow, to ensure that it is answered promptly and accurately.
 
 ## Good Bug Reports
@@ -23,7 +23,7 @@ Please be aware of the following things when filing bug reports:
 
 1. Avoid raising duplicate issues. *Please* use the GitHub issue search feature
    to check whether your bug report or feature request has been mentioned in
-   the past. Duplicate bug reports and feature requests are a huge maintenance
+   the past. Duplicate bug reports and feature requestests are a huge maintenance
    burden on the limited resources of the project. If it is clear from your
    report that you would have struggled to find the original, that's ok, but
    if searching for a selection of words in your issue title would have found
