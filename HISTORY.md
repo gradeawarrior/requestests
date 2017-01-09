@@ -2,6 +2,12 @@ Release History
 ===============
 
 
+### 1.2.2 (2017-01-09)
+
+**New Features**
+
+- Fixing major issue with installing requestests v1.2.1 from PyPi server
+
 ### 1.2.1 (2017-01-09)
 
 **New Features**

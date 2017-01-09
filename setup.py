@@ -45,7 +45,10 @@ with open('requestests/__init__.py', 'r') as fd:
 if not version:
     raise RuntimeError('Cannot find version information')
 
-with open('README-pypi.md', 'r', 'utf-8') as f:
+readme_file = 'README.md'
+if os.path.isfile('README-pypi.md'):
+    readme_file = 'README-pypi.md'
+with open(readme_file, 'r', 'utf-8') as f:
     readme = f.read()
 with open('HISTORY.md', 'r', 'utf-8') as f:
     history = f.read()
@@ -59,7 +62,7 @@ setup(
     author_email='psalas@gmail.com',
     url='http://python-requests.org',
     packages=packages,
-    package_data={'': ['LICENSE', 'NOTICE', 'README-pypi.md'], 'requestests': ['*.pem']},
+    package_data={'': ['LICENSE', 'NOTICE'], 'requestests': ['*.pem']},
     package_dir={'requestests': 'requestests'},
     include_package_data=True,
     install_requires=requires,
