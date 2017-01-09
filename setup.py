@@ -59,7 +59,7 @@ setup(
     author_email='psalas@gmail.com',
     url='http://python-requests.org',
     packages=packages,
-    package_data={'': ['LICENSE', 'NOTICE'], 'requestests': ['*.pem']},
+    package_data={'': ['LICENSE', 'NOTICE', 'README-pypi.md'], 'requestests': ['*.pem']},
     package_dir={'requestests': 'requestests'},
     include_package_data=True,
     install_requires=requires,
